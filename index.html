@@ -6,8 +6,9 @@
     <title>Редактирование таблички</title>
     <!-- Подключение CSS -->
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
-<body class="color-mode">
+<body>
     <div id="header-container">
         <!-- Логотип -->
         <img id="logo" src="Layer 1 copy.png" alt="Логотип">
@@ -15,24 +16,43 @@
         <h1>Редактирование таблички «Моя поликлиника»</h1>
     </div>
 
-    <!-- Кнопка переключения цветного и черно-белого режима -->
-    <button id="toggle-color-mode">Переключить на черно-белый</button>
+    <!-- Выпадающий список для выбора формата -->
+    <select id="format-selector">
+        <option value="format1">Формат 1</option>
+        <option value="format2">Формат 2</option>
+        <option value="format3">Формат 3</option>
+    </select>
 
-    <!-- Контейнер для таблички -->
-    <div id="template">
-        <!-- Заголовок -->
-        <div id="header" contenteditable="true">Врач общей практики</div>
-        <!-- Основное имя -->
-        <div id="name">
-            <span contenteditable="true" id="firstname">Имя Отчество</span>
-            <span contenteditable="true" id="lastname">Фамилия</span>
+    <!-- Контейнер для шаблонов -->
+    <div id="template-container">
+        <!-- Формат 1 -->
+        <div id="format1" class="template">
+            <div id="header">Врач общей практики</div>
+            <div id="name">Имя Отчество<br>Фамилия</div>
+        </div>
+        
+        <!-- Формат 2 -->
+        <div id="format2" class="template" style="display: none;">
+            <div id="fio-container">
+                <div id="fio">Имя Отчество</div>
+                <div id="fio-lastname">Фамилия</div>
+            </div>
+        </div>
+        
+        <!-- Формат 3 -->
+        <div id="format3" class="template" style="display: none;">
+            <div id="cabinet">
+                <div id="room-number">325</div>
+                <div id="room-name">ЭКГ</div>
+            </div>
+            <div id="fio-container">
+                <div id="fio">Имя Отчество</div>
+                <div id="fio-lastname">Фамилия</div>
+            </div>
         </div>
     </div>
 
     <!-- Кнопка печати -->
     <button onclick="printTemplate()">Печать Таблички</button>
-
-    <!-- Подключение JavaScript -->
-    <script src="script.js"></script>
 </body>
 </html>
