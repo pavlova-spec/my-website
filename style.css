@@ -1,3 +1,4 @@
+/* Подключение шрифтов */
 @font-face {
     font-family: 'ALS Schlangesans Bold';
     src: url('ALSSchlangesans-Bold.woff') format('woff');
@@ -7,6 +8,7 @@
     src: url('ALSSchlangesans.woff') format('woff');
 }
 
+/* Общие стили */
 body {
     font-family: 'ALS Schlangesans', sans-serif;
     margin: 20px;
@@ -15,55 +17,52 @@ body {
     text-align: center;
 }
 
-.color-mode {
-    --header-bg: #38B7F0;
-    --header-text: white;
-    --header-font: 'ALS Schlangesans Bold', sans-serif;
-    --name-font-weight: bold;
-}
-
-.black-white-mode {
-    --header-bg: white;
-    --header-text: black;
-    --header-font: 'ALS Schlangesans', sans-serif;
-    --name-font-weight: normal;
-}
-
 #header-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin-bottom: 20px;
-}
-
-#logo {
-    height: 50px;
-    margin-right: 15px;
 }
 
 h1 {
     font-size: 24px;
-    color: #444;
-    margin: 0;
+    margin-bottom: 10px;
 }
 
-#template {
-    width: 297mm;
-    height: 158mm;
-    margin: 0 auto;
-    margin-bottom: 40px;
-    border: 2px solid #000;
-    background-color: #fff;
-    position: relative;
-    padding: 0;
-    box-shadow: none;
-    overflow: hidden;
+select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
-#header {
-    background-color: var(--header-bg);
-    color: var(--header-text);
-    font-family: var(--header-font);
+button {
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background: linear-gradient(90deg, #38B7F0, #2A92BF);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(90deg, #2A92BF, #1C6D99);
+}
+
+/* Скрываем все шаблоны по умолчанию */
+.template {
+    display: none;
+}
+
+/* Формат 1 */
+#format1 {
+    display: block;
+}
+
+#format1 #header {
+    background-color: #38B7F0;
+    color: white;
+    font-family: 'ALS Schlangesans Bold', sans-serif;
     font-size: 72px;
     height: 53mm;
     line-height: 1.2;
@@ -74,54 +73,112 @@ h1 {
     overflow: hidden;
     display: flex;
     align-items: center;
-    max-width: calc(100% - 20mm);
 }
 
-#name {
+#format1 #name {
     font-size: 60px;
-    font-weight: var(--name-font-weight);
+    font-weight: bold;
     margin-top: 10mm;
     margin-bottom: 5mm;
-    line-height: 1.0;
+    line-height: 1.2;
     text-align: left;
     padding-left: 10mm;
     font-family: 'ALS Schlangesans', sans-serif;
 }
 
-#name span {
+/* Формат 2 */
+#format2 {
     display: block;
-    margin-bottom: 0px;
-    line-height: 1.0;
+    width: 297mm;
+    height: 210mm;
+    margin: 0 auto;
+    border: 2px solid #000;
+    background-color: #fff;
+    position: relative;
+    padding: 0;
 }
 
-button, #toggle-color-mode {
+#format2 #fio-container {
+    position: absolute;
+    top: 128mm;
+    left: 17mm;
+    width: 265mm;
+    height: 60mm;
+    font-size: 60px;
+    line-height: 1.2;
+    text-align: left;
+}
+
+#format2 #fio {
     display: block;
-    margin: 20px auto;
-    padding: 15px 30px;
-    font-size: 18px;
+}
+
+#format2 #fio-lastname {
+    display: block;
+}
+
+/* Формат 3 */
+#format3 {
+    display: block;
+    width: 297mm;
+    height: 210mm;
+    margin: 0 auto;
+    border: 2px solid #000;
+    background-color: #fff;
+    position: relative;
+    padding: 0;
+}
+
+#format3 #cabinet {
+    position: absolute;
+    top: 19mm;
+    left: 19mm;
+    text-align: left;
+}
+
+#format3 #room-number {
+    font-size: 40px;
     font-weight: bold;
-    background: linear-gradient(90deg, #38B7F0, #2A92BF);
-    color: white;
-    border: none;
-    border-radius: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: all 0.3s ease;
+    line-height: 1;
 }
 
-button:hover, #toggle-color-mode:hover {
-    background: linear-gradient(90deg, #2A92BF, #1C6D99);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+#format3 #room-name {
+    font-size: 21px;
+    margin-top: 15mm;
+    display: block;
 }
 
+#format3 #fio-container {
+    position: absolute;
+    top: 128mm;
+    left: 19mm;
+    width: 265mm;
+    height: 60mm;
+    font-size: 60px;
+    line-height: 1.2;
+    text-align: left;
+}
+
+#format3 #fio {
+    display: block;
+}
+
+#format3 #fio-lastname {
+    display: block;
+}
+
+/* Печать: Скрываем кнопки и другие элементы интерфейса */
 @media print {
-    #toggle-color-mode, button {
+    #header-container, select, button {
         display: none;
     }
+
     body {
         margin: 0;
     }
-    #template {
-        box-shadow: none;
+
+    .template {
+        margin: 0 auto;
+        border: none;
     }
 }
