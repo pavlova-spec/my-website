@@ -1,36 +1,31 @@
-document.getElementById("toggle-color-mode").addEventListener("click", function () {
-    const body = document.body;
-    const header = document.getElementById("header");
-    const name = document.getElementById("name");
-    const button = document.getElementById("toggle-color-mode");
+// Функция переключения форматов
+const formatSelector = document.getElementById("format-selector");
+const templates = document.querySelectorAll(".template");
 
-    if (body.classList.contains("color-mode")) {
-        body.classList.remove("color-mode");
-        body.classList.add("black-white-mode");
+formatSelector.addEventListener("change", function () {
+    const selectedFormat = formatSelector.value;
 
-        button.textContent = "Переключить на цветной";
+    // Скрываем все форматы
+    templates.forEach((template) => {
+        template.style.display = "none";
+    });
 
-        header.style.fontFamily = "'ALS Schlangesans', sans-serif";
-        header.style.fontWeight = "bold";
-
-        name.style.fontWeight = "normal";
-    } else {
-        body.classList.remove("black-white-mode");
-        body.classList.add("color-mode");
-
-        button.textContent = "Переключить на черно-белый";
-
-        header.style.fontFamily = "'ALS Schlangesans Bold', sans-serif";
-        header.style.fontWeight = "normal";
-
-        name.style.fontWeight = "bold";
+    // Показываем выбранный формат
+    const activeTemplate = document.getElementById(selectedFormat);
+    if (activeTemplate) {
+        activeTemplate.style.display = "block";
     }
 });
 
+// Функция печати
 function printTemplate() {
-    const templateContent = document.getElementById("template").outerHTML;
+    const selectedFormat = formatSelector.value;
+    const activeTemplate = document.getElementById(selectedFormat);
 
-    const isColorMode = document.body.classList.contains("color-mode");
+    if (!activeTemplate) {
+        alert("Выберите формат таблички перед печатью.");
+        return;
+    }
 
     const printWindow = window.open("", "_blank", "width=800,height=600");
     printWindow.document.write(`
@@ -50,54 +45,72 @@ function printTemplate() {
                     body {
                         margin: 0;
                         padding: 0;
-                        background-color: white;
-                    }
-
-                    #template {
-                        width: 297mm;
-                        margin: 0 auto;
-                        border: 2px solid #000;
-                        background-color: #fff;
                         font-family: 'ALS Schlangesans', sans-serif;
                     }
 
+                    .template {
+                        width: 297mm;
+                        height: 210mm;
+                        margin: 0 auto;
+                        border: 2px solid #000;
+                        position: relative;
+                        padding: 0;
+                        background-color: #fff;
+                    }
+
                     #header {
-                        background-color: ${isColorMode ? "#38B7F0" : "white"};
-                        color: ${isColorMode ? "white" : "black"};
-                        font-family: ${isColorMode ? "'ALS Schlangesans Bold', sans-serif" : "'ALS Schlangesans', sans-serif"};
-                        font-weight: ${isColorMode ? "normal" : "bold"};
+                        background-color: #38B7F0;
+                        color: white;
+                        font-family: 'ALS Schlangesans Bold', sans-serif;
                         font-size: 72px;
                         height: 53mm;
                         line-height: 1.2;
                         text-align: left;
                         padding-left: 10mm;
                         padding-right: 10mm;
-                        word-wrap: break-word;
-                        overflow: hidden;
                         display: flex;
                         align-items: center;
-                        max-width: calc(100% - 20mm);
                     }
 
-                    #name {
+                    #name, #fio-container {
                         font-size: 60px;
-                        font-family: 'ALS Schlangesans', sans-serif;
-                        font-weight: ${isColorMode ? "bold" : "normal"};
-                        line-height: 1.0;
-                        margin-top: 10mm;
+                        line-height: 1.2;
                         text-align: left;
                         padding-left: 10mm;
+                        width: 265mm;
+                        height: 60mm;
                     }
 
-                    #name span {
+                    #fio {
                         display: block;
-                        margin-bottom: 0px;
-                        line-height: 1.0;
+                    }
+
+                    #fio-lastname {
+                        display: block;
+                    }
+
+                    #cabinet {
+                        position: absolute;
+                        top: 19mm;
+                        left: 19mm;
+                        text-align: left;
+                    }
+
+                    #room-number {
+                        font-size: 40px;
+                        font-weight: bold;
+                        line-height: 1;
+                    }
+
+                    #room-name {
+                        font-size: 21px;
+                        margin-top: 15mm;
+                        display: block;
                     }
                 </style>
             </head>
             <body>
-                ${templateContent}
+                ${activeTemplate.outerHTML}
             </body>
         </html>
     `);
