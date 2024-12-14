@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактирование таблички</title>
+    <!-- Подключение CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="color-mode">
+    <div id="header-container">
+        <!-- Логотип -->
+        <img id="logo" src="Layer 1 copy.png" alt="Логотип">
+        <!-- Название страницы -->
+        <h1>Редактирование таблички «Моя поликлиника»</h1>
+    </div>
+
+    <!-- Кнопка переключения цветного и черно-белого режима -->
+    <button id="toggle-color-mode">Переключить на черно-белый</button>
+
+    <!-- Контейнер для таблички -->
+    <div id="template">
+        <!-- Заголовок -->
+        <div id="header" contenteditable="true">Врач общей практики</div>
+        <!-- Основное имя -->
+        <div id="name">
+            <span contenteditable="true" id="firstname">Имя Отчество</span>
+            <span contenteditable="true" id="lastname">Фамилия</span>
+        </div>
+    </div>
+
+    <!-- Кнопка печати -->
+    <button onclick="printTemplate()">Печать Таблички</button>
+
+    <!-- Подключение JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
